@@ -4,11 +4,9 @@ import read from './reader.js';
 
 export default class GameSavingLoader {
   static load() {
-    return new Promise((resolve, reject) => {
-      read()
-        .then((data) => json(data))
-        .then((value) => { resolve(new GameSaving(value)); })
-        .catch((error) => reject(error));
-    });
+    return read()
+      .then((data) => json(data))
+      .then((value) => new GameSaving(value))
+      .catch((error) => { throw error; });
   }
 }
